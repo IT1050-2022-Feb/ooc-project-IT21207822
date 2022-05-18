@@ -1,0 +1,256 @@
+#include <iostream>
+#include<cstring>
+
+using namespace std;
+
+//declaring clothes class
+class Clothes
+{
+	private:
+		int item_ID;
+		char brand_Name[20];
+		float price;
+
+	public:
+		Clothes();
+		Clothes(int citem_id, char cbrand_Name[], float cprice);
+		void additems();
+		void removeitems();
+		void restockitems();
+};
+
+//Declaration of customer class
+
+class Customer
+{
+	private:
+		int customer_ID;
+		char customerName[200];
+		char dateofbirth[10];
+		char address[200];
+
+		Order* orders[10];
+
+	public:
+		Customer();
+		Customer(int cid, char cname[], char dob[], char addr[]);
+		void registration();
+		void search();
+};
+
+//Declaration of Payment Class
+class Payment
+{
+	private:
+		int payment_id;
+		float amount;
+
+		Order* myorder;
+
+	public:
+		Payment();
+		Payment(int pid, float pamount);
+		void verify_payment();
+};
+
+
+
+//Declaration of order class
+class Order
+{
+	private:
+		int order_ID;
+		int quantity;
+
+		Clothes* itms[10];
+		Staff* stff[10];
+		Customer* cus;
+		Payment** payments[10];
+
+	public:
+		Order();
+		Order(int oid, int oqty);
+		void verifypayment();
+};
+
+//Declaration of staff class
+class Staff
+{
+	private:
+		int staff_ID;
+		char staff_Name[];
+
+	public:
+		Staff();
+		Staff(int sid, char sname[]);
+		void notify();
+
+};
+
+
+//Declaration of sales record class
+
+class Sales_Records
+{
+	private:
+		int transaction_ID;
+
+		Order* orders[10];
+
+	public:
+		Sales_Records();
+		Sales_Records(int transID);
+		void itemtransaction();
+};
+
+//Declaration of cash class
+class Cash: public Payment
+{
+	private:
+		float amount;
+
+	public:
+		Cash();
+		Cash(float cash_amt);
+};
+
+//Declaration of card class
+
+class Card: public Payment
+{
+	private:
+		int card_Number;
+		char card_type[10];
+		char expdate[5];
+
+	public:
+		Card();
+		Card(int card_no, char ctype[], char exdate[]);
+		void card_authorize();
+};
+
+//Declaration of Paypal class
+
+class Paypal: public Payment
+{
+	private:
+		int paypalID;
+		char paypalName[50];
+
+	public:
+		Paypal();
+		Paypal(int payID, char pname[]);
+		void paypal_Authorize();
+};
+
+
+//Clothes class
+
+Clothes:: Clothes(){}
+
+Clothes:: Clothes(int citem_id, char cbrand_Name[], float cprice)
+{
+	item_ID = citem_id;
+	strcpy(brand_Name, cbrand_Name);
+	price = cprice;
+}
+
+void Clothes:: additems(){}
+void Clothes:: removeitems(){}
+void Clothes:: restockitems(){}
+
+
+Cash::Cash(){}
+Cash::Cash(float cash_amt)
+{
+	amount = cash_amt;
+}
+
+Payment::Payment(){}
+Payment::Payment(int pid, float pamount)
+{
+	payment_id = pid;
+	amount = pamount;
+}
+void Payment::verify_payment(){}
+
+
+Customer::Customer(){}
+Customer::Customer(int cid, char cname[], char dob[], char addr[])
+{
+	customer_ID = cid;
+	strcpy(customerName,cname);
+	strcpy(dateofbirth,dob);
+	strcpy(address,addr);
+}
+void Customer:: registration(){}
+void Customer::search(){}
+
+
+void addOrders(Order* ord1){}
+Sales_Records::Sales_Records(){}
+Sales_Records::Sales_Records(int transID)
+{
+	transaction_ID = transID;
+}
+
+void Sales_Records::itemtransaction(){}
+
+
+Card::Card(){}
+Card::Card(int card_no, char ctype[], char exdate[])
+{
+	card_Number = card_no;
+	strcpy(card_type,ctype);
+	strcpy(expdate, exdate);
+}
+ void Card:: card_authorize(){}
+ 
+ 
+ Paypal::Paypal(){}
+ Paypal::Paypal(int payID, char pname[])
+ {
+	 paypalID = payID;
+	 strcpy(paypalName, pname);
+ }
+ void Paypal:: paypal_Authorize(){}
+ 
+ 
+
+ Order::Order(){}
+Order::Order(int oid, int oqty)
+{
+	order_ID = oid;
+	quantity = oqty;
+}
+void Order:: verifypayment(){}
+
+void additems(Clothes* cl1){}
+void addStaff(Staff* st1){}
+
+
+Order::Order(){}
+Order::Order(int oid, int oqty)
+{
+	order_ID = oid;
+	quantity = oqty;
+}
+void Order:: verifypayment(){}
+
+void additems(Clothes* cl1){}
+void addStaff(Staff* st1){}
+
+
+//implementing the main program
+int main()
+{
+	Clothes cl_1(1001, "Licc", 750.00);
+	Staff st_1(2001, "Kasun");
+	Customer cust_1(5001, "Nethisha", "12/05/1998", "Ragama");
+	Order ord_1(8001, 5);
+	Sales_Records recoord_1(450);
+	Payment pay_1(10001, 3750.00);
+	Cash cas_1(12500.00);
+	Card crd_1(123456789142, "Visa", "07/24");
+	Paypal pypl_1(452178, "Suren Vithanage");
+}
